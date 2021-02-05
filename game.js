@@ -12,7 +12,7 @@ function run_game() {
     const values = [];
     const keys = [];
 
-    const guessed = {};
+    const guessed = {}; //already guessed characters
 
 
     for(let i=0; i<randomWord.length; i++) {
@@ -20,6 +20,7 @@ function run_game() {
         values.push("_");
     };
 
+    //print function
     function getResStr() {
         let str = "";
         keys.forEach((key, index)=> {
@@ -28,8 +29,9 @@ function run_game() {
         console.log(str+"\t\t"+"Remaining incorrect attemps: "+attempts);
     }
 
-    getResStr();
+    getResStr(); //initial print
     
+    //update value array based on correct guess
     function updateVal(guess_char) {
         keys.forEach((key, index)=>{
             if(key == guess_char) {
@@ -38,6 +40,7 @@ function run_game() {
         });
     }
 
+    //current game status
     function game_status(values) {
         for (const val of values) {
             if(val == "_") return false;
@@ -46,11 +49,14 @@ function run_game() {
         return true;
     }
 
+    //check if guessed word is correct or not
     function isCorrect(guess) {
         if(randomWord.indexOf(guess) < 0) return false;
         return true;
     }
 
+
+    //word guess function
     function guess_char() {
         if(attempts == 0 || game_status(values)) {
             if(attempts == 0) {
@@ -66,7 +72,7 @@ function run_game() {
             guessed[answer] = true;
             if (attempts != 0) {
                 updateVal(answer);
-                if (!isCorrect(answer)) {
+                if (!isCorrect(answer)) { //if incorrect guess
                     attempts -= 1;
                 }
                 getResStr();
