@@ -7,8 +7,28 @@ function run_game() {
 
     console.log("Save your girlfriend. Guess the correct word or a Dragon will slain your girlfriend");
     console.log("Good Luck! You have 6 incorrect attempts");
-
     
+    console.log(`
+                          ^\    ^                  
+                      / \\  / \                 
+                     /.  \\/   \      |\___/|   
+  *----*           / / |  \\    \  __/  O  O\   
+  |   /          /  /  |   \\    \_\/  \     \     
+ / /\/         /   /   |    \\   _\/    '@___@      
+/  /         /    /    |     \\ _\/       |U
+|  |       /     /     |      \\\/        |
+\  |     /_     /      |       \\  )   \ _|_
+\   \       ~-./_ _    |    .- ; (  \_ _ _,\'
+~    ~.           .-~-.|.-*      _        {-,
+ \      ~-. _ .-~                 \      /\'
+  \                   }            {   .*
+   ~.                 '-/        /.-~----.
+     ~- _             /        >..----.\\\
+         ~ - - - - ^}_ _ _ _ _ _ _.-\\\
+    `);
+
+    console.log();
+    console.log();
     const values = [];
     const keys = [];
 
@@ -45,7 +65,11 @@ function run_game() {
         for (const val of values) {
             if(val == "_") return false;
         }
+        console.log();
+        console.log();
         console.log("Victory shall be yours.");
+        console.log();
+        console.log();
         return true;
     }
 
@@ -61,13 +85,21 @@ function run_game() {
         if(attempts == 0 || game_status(values)) {
             if(attempts == 0) {
                 console.log("User's girlfriend was slained by Dragon");
+                console.log();
+                console.log();
                 console.log("Correct word was :" + randomWord);
+                console.log();
+                console.log();
             }
             return;
         }
         let answer = readlineSync.question("User: ");
         if(guessed.hasOwnProperty(answer)) {
+            console.log();
+            console.log();
             console.log("You already guessed that!");
+            console.log();
+            console.log();
         }else {
             guessed[answer] = true;
             if (attempts != 0) {
@@ -85,3 +117,9 @@ function run_game() {
     
 }
 run_game();
+
+let response = readlineSync.question("Do you want to play again? Y/N: ");
+while(response != "N") {
+    run_game();
+    response = readlineSync.question("Do you want to play again? Y/N: ");
+}
